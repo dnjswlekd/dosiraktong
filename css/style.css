@@ -1,0 +1,82 @@
+@charset "uft-8";
+/* 절대로 위의 줄은 1번줄에 배치해야함 */
+/* 세미콜론을 찍어야 새로운 css가 시작이 된다. */
+/* 글꼴 import 진행 */
+@import url("./font/font.css")
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* 테두리가 들어가도 안쪽으로 */
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+img {
+  border: 0;
+  vertical-align: middle;
+}
+
+html {
+  font-size: 16px;
+  /* 기본 폰트사이즈 px or rem*/
+}
+
+body {
+  font-family: "Poppins", "Pretendard", sans-serif;
+  /* min-width: 320px; */
+  /* overflow-x: hidden; */
+  overflow-y: scroll;
+  color: #222;
+  font-size: 16px;
+  line-height: 1;
+  /* 폰트 사이즈 x1 */
+  letter-spacing: 0px;
+  /* background: #fff; */
+  word-break: keep-all;
+}
+/* 레이아웃 */
+.wrap {
+  position: relative;
+  /* 좌표의 기준 */
+  display: block;
+}
+/* 상단 */
+.header {
+  position: relative;
+  display: block;
+}
+/* 비주얼 */
+.visual {
+  position: relative;
+  display: block;
+}
+/* 서비스 */
+.service {
+  position: relative;
+  display: block;
+}
+/* 정보 */
+.info {
+  position: relative;
+  display: block;
+}
+/* 서비스 카테고리 */
+.category {
+  position: relative;
+  display: block;
+}
+/* 하단 */
+.footer {
+  position: relative;
+  display: block;
+}
