@@ -1,0 +1,263 @@
+@charset "utf-8";
+/* 절대로 위의 줄은 1번줄에 배치 */
+@import url("./font/font.css");
+/* 글꼴은 @import로 진행, css > font폴더 안 > font.css 만들기 */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* content-box가 default -> 컨텐츠 영역만을 나타내고, borderbox는 컨텐츠 + 패딩 + 보더를 합한 값 */
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+img {
+  border: 0;
+  vertical-align: middle;
+}
+
+html {
+  font-size: 16px;
+  /* default 폰트사이즈 16px */
+}
+
+body {
+  font-family: "Poppins", "Pretendard", sans-serif;
+  /* sans-serif 고딕체 계열 */
+  color: #222;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0;
+  word-break: keep-all;
+  height: 5000px;
+}
+
+html.active {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+/* 공통요소 : 2번이상 재활용 코드 */
+.inner {
+  position: relative;
+  display: block;
+  /* 반응형이므로 */
+  max-width: 1420px;
+  width: 100%;
+  /* block 요소 가운데 정렬 */
+  margin: 0 auto;
+}
+
+/* 레이아웃 */
+.wrap {
+  position: relative;
+  display: block;
+}
+
+/* 상단 */
+.header {
+  /* 메뉴가 상단에 고정되서 스크롤이 된다면 fixed */
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 100px;
+  /* header는 무조건 z-index를 쓰자! 최댓값으로 */
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0);
+  transition: height 0.5s, background 0.5s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header .inner {
+  max-width: 100%;
+  height: 100%;
+  z-index: 9;
+}
+/* left, top, right, bottom 사용시
+  반드시 position : absolute를 쓰자.
+  즉, position : relative에 쓰지 말자*/
+
+.logo {
+  position: absolute;
+  top: 35px;
+  left: 60px;
+  /* 
+    a, span 등은 기본 display:inline
+    너비, 높이, margin, padding 설정 못함
+    그래서 최소 inline-block 이라고 해야한다.  
+  */
+  display: inline-block;
+  width: 125px;
+  height: 30px;
+  background: url("../images/logo_white.png") no-repeat center;
+  background-size: cover;
+  transition: top 0.5s, background 0.5s;
+}
+
+.header.active .nav {
+  height: 80px;
+}
+
+.nav {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+
+.gnb {
+  display: flex;
+  height: 100%;
+  /* 세로 중앙 정렬 */
+  align-items: center;
+}
+
+/* .gnb > li : 주의사항 -> 호버했을 시 만약 서브 메뉴가 있다면 적용 */
+.gnb > li {
+}
+
+.gnb > li > a {
+  display: block;
+  font-size: 17px;
+  font-weight: 500;
+  color: #fff;
+  /* a 태그 영역확대를 위해 padding 사용 */
+  padding: 40px 38px;
+}
+
+.gnb > li > a > span {
+  position: relative;
+  display: block;
+  padding-bottom: 7px;
+}
+
+.gnb > li > a > span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.5s;
+}
+
+.gnb > li > a:hover > span::after {
+  width: 100%;
+}
+
+/* 
+  javascript 에서는
+  display:none 선택이 안될 때가 있어요.
+  querySelector(".mb-bt");
+  opacity: 0 은 배제합니다. 작동이 되기 때문.
+  결론은 오른쪽으로 완전히 보내버려서 안보이게 만든다.  
+*/
+
+.mb-bt {
+  position: absolute;
+  right: -20000px;
+  top: 24px;
+  width: 30px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  /* 버튼이라서 누르는 버튼 보더 있음 */
+  cursor: pointer;
+}
+
+.mb-bt span {
+  position: absolute;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+}
+
+.mb-bt span:nth-child(1) {
+  transition: transform 0.3s;
+}
+.mb-bt span:nth-child(2) {
+
+}
+.mb-bt span:nth-child(3) {
+
+}
+
+/* 스크롤시 css 적용 */
+.header.active {
+  height: 80px;
+  background: rgba(255, 255, 255, 1);
+}
+
+.logo.active {
+  top: 25px;
+  background: url("../images/logo.png") no-repeat center;
+  background-size: cover;
+}
+
+.logo.active-blue {
+  background: url("../images/logo.png") no-repeat center;
+  background-size: cover;
+}
+
+.gnb > li > a.active {
+  color: #222;
+}
+
+/* 1. 숫자가 증가하는 형태 - 모바일 > 태블릿 > 데스크탑 */
+/* 2. 숫자가 감소하는 형태 - 데스크탑 > 태블릿 > 모바일 */
+@media screen and (max-width: 1280px) {
+  .header {
+    height: 90px;
+  }
+  .logo {
+    top: 30px;
+    left: 20px;
+    width: 150px;
+    height: 30px;
+  }
+  .gnb > li > a {
+    padding: 25px 35px;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .header {
+    height: 70px !important;
+  }
+  .logo {
+    top: 20px !important;
+    width: 120px;
+    height: 30px;
+  }
+  .gnb {
+    display: none;
+  }
+  .mb-bt {
+    right: 20px;
+  }
+}
+
+/* visual */
+.visual {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100vh;
+  background: url("../images/main_visual_1.jpg") no-repeat center;
+  background-size: cover;
+}
